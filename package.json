@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "gulp", "demo"
+    "gulp",
+    "demo"
   ],
   "author": "gapsaras",
   "license": "ISC",
@@ -15,9 +16,12 @@
     "browser-sync": "^2.18.8",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.2.0",
+    "gulp-minify-css": "^1.2.4",
     "gulp-sass": "^3.1.0",
+    "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^2.1.2",
     "opn": "^4.0.2",
     "run-sequence": "^1.2.2"

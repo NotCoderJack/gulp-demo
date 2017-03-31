@@ -5,12 +5,16 @@ var gulpIf = require('gulp-if');
 var browserSync = require('browser-sync').create();
 var imagemin = require('gulp-imagemin');
 var del = require('del');
+var minifyCss = require('gulp-minify-css')
+var autoprefix = require('gulp-autoprefixer');
 var runSequence = require('run-sequence');
+var stripDebug = require('gulp-strip-debug');
 var reload = browserSync.reload;
 gulp.task('sass', function(){
     return gulp.src('app/styles/**/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest('dist/static/css'))
+        .pipe(autoprefix('last 2 version', 'ie 8', 'ie 9'))
+        .pipe(gulp.dest('app/css'))
         .pipe(reload({
             stream: true
         }))
@@ -31,10 +35,14 @@ gulp.task('images', function(){
 })
 gulp.task('uglify-js', function(){
     return gulp.src('app/scripts/**/*.js')
-        .pipe(uglify())
+        .pipe(uglify({compress:{drop_console:true}}))
         .pipe(gulp.dest('dist/static/scripts'))
 })
-
+gulp.task('minifyCss', function(){
+    return gulp.src('app/css/**/*.css')
+        pipe(minifyCss())
+        pipe(gulp.dest('dist/static/css/**/*.css'))
+})
 gulp.task('watch', ['browserSync'], function(){
     gulp.watch('app/styles/**/*.scss', ['sass']);
     gulp.watch('app/htmls/**/*.html', reload);
@@ -49,4 +57,9 @@ gulp.task('run-sequence', function(cb){
 gulp.task('build', ['run-sequence'], function(cb){
 })
 gulp.task('serve', ['watch'], function(){
+})
+gulp.task('bye-console',function(){
+    return gulp.src('app/scripts/**/*.js')
+        pipe(stripDebug())
+        pipe(gulp.dest('dist'))
 })
