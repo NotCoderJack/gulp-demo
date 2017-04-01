@@ -1,7 +1,16 @@
-const b = 0;
+const c = 0;
 var obj = {
     a: 'helo',
-    b: function(){
-        console.log(this.a);
+    b: () => {
+        console.log({
+            hell: 'hello',
+            world: 'wo'
+        });
     }
+};
+[0,2,3].map( (item, i) =>{
+        console.log(item);
+});
+class MyClass {
 }
+export default obj;

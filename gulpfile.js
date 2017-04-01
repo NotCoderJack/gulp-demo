@@ -1,3 +1,4 @@
+'use strict'
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
@@ -9,7 +10,20 @@ var minifyCss = require('gulp-minify-css')
 var autoprefix = require('gulp-autoprefixer');
 var runSequence = require('run-sequence');
 var stripDebug = require('gulp-strip-debug');
+const babel = require('gulp-babel');
+var sloc = require('gulp-sloc');
 var reload = browserSync.reload;
+// 执行gulp task可以传入参数
+var params = function(args) {
+    // gulp param -src 'param here'
+    var obj = {};
+    for (let i = 0; i < args.length; i ++) {
+        let key = args[i].substr(1);
+        obj[key] = args[i+1];
+        i++;
+    }
+    return obj;
+}
 gulp.task('sass', function(){
     return gulp.src('app/styles/**/*.scss')
         .pipe(sass())
@@ -59,7 +73,24 @@ gulp.task('build', ['run-sequence'], function(cb){
 gulp.task('serve', ['watch'], function(){
 })
 gulp.task('bye-console',function(){
+    var src = params(process.argv.splice(3));
+    console.log(src);
+    return gulp.src(src.src)
+        .pipe(stripDebug())
+        .pipe(gulp.dest('./dist/scripts'))
+})
+gulp.task('lines', function(){
     return gulp.src('app/scripts/**/*.js')
-        pipe(stripDebug())
-        pipe(gulp.dest('dist'))
+        .pipe(sloc())
+})
+gulp.task('babel', function(){
+    return gulp.src('app/scripts/**/*.js')
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist/static/scripts'))
+})
+gulp.task('param', function(){
+    console.log(process.argv);
+    console.log(params(process.argv.splice(3)));
 })
