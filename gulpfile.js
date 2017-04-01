@@ -6,7 +6,7 @@ var gulpIf = require('gulp-if');
 var browserSync = require('browser-sync').create();
 var imagemin = require('gulp-imagemin');
 var del = require('del');
-var minifyCss = require('gulp-minify-css')
+var minifyCss = require('gulp-minify-css');
 var autoprefix = require('gulp-autoprefixer');
 var runSequence = require('run-sequence');
 var stripDebug = require('gulp-strip-debug');
@@ -41,7 +41,7 @@ gulp.task('browserSync', ['sass'], function(){
             index: 'htmls/index.html'
         }
     })
-})
+});
 gulp.task('images', function(){
     return gulp.src('app/images/**/*.+(png|jpg|gif|svg)')
         .pipe(imagemin())
