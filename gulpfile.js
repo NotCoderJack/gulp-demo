@@ -129,4 +129,5 @@ gulp.task('test', function(){
                 pass: 'haojie',
                 remotePath: '/home/gulp-demo'
             })
+        );
 });
