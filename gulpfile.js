@@ -109,7 +109,7 @@ gulp.task('zip', function(){
 gulp.task('sftp', function(){
     return gulp.src('./dist/*.zip')
         .pipe(
-            sftp({
+            gulpSftp({
                 host: '45.78.47.74',
                 port: 27615,
                 user: 'haojie',
@@ -122,7 +122,7 @@ gulp.task('sftp', function(){
 gulp.task('test', function(){
     return gulp.src('./dist/*.zip')
         .pipe(
-            sftp({
+            gulpSftp({
                 host: '45.78.47.74',
                 port: 27615,
                 user: 'haojie',
