@@ -25,7 +25,7 @@ fi
 
 # 上传测试FTP
 if [ "$1" == "-test" ]; then
-  confirm = `read -p 'Note: before your upload, check the env file again! Sure to upload ? yes/no'`
+  confirm=`read -p 'Note: before your upload, check the env file again! Sure to upload ? yes/no:'`
   echo "$confirm"
   #git pull origin "$master"
   #git pull origin "$branch"
@@ -54,6 +54,6 @@ elif [ "$1" == "-depoly" ]; then
     echo -e "\n\033[92m Upload to deploy ftp successfully.\n"
 
 else
-  echo -e "\033[31m Please select upload mode."
+  echo -e "\033[31m Please select upload mode. -test or -deploy"
 
 fi
