@@ -4,7 +4,7 @@
 #统计输出信息行数
 lines=`git status --porcelain | wc -l`
 if [ "$lines" -gt 0 ]; then
-    echo -e "\033[31m Git not clean, please commit first]"
+    echo -e "\033[31m Git not clean, please commit first"
     exit
 fi
 
@@ -25,13 +25,18 @@ fi
 
 # 上传测试FTP
 if [ "$1" == "-test" ]; then
-  confirm=`read -p 'Note: before your upload, check the env file again! Sure to upload ? yes/no:'`
-  echo "$confirm"
-  #git pull origin "$master"
-  #git pull origin "$branch"
-  #git push origin "$branch"
-  #gulp test
-  echo -e "\n\033[92m Upload to test ftp successfully.\n"
+    echo 'Note: before your upload, check the env file again! Sure to upload ? yes/no:'
+    read confirm
+    if [ "$confirm" == "yes" ]; then
+        git pull origin "$master"
+        git pull origin "$branch"
+        git push origin "$branch"
+        gulp lines
+        echo -e "\n\033[92m Upload to test ftp successfully.\n"
+    else
+        echo "Upload Canceled!"
+        exit
+    fi
 
 #上传发布ftp
 elif [ "$1" == "-depoly" ]; then
