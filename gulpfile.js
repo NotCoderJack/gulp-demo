@@ -127,7 +127,7 @@ gulp.task('test', function(){
                 port: 27615,
                 user: 'haojie',
                 pass: 'haojie',
-                remotePath: '/home/gulp-demo'
+                remotePath: '/home/haojie/gulp-demo'
             })
         );
 });
