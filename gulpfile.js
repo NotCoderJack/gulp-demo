@@ -3,6 +3,9 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
+var gulpZip = require('gulp-zip');
+var gulpSftp =require('gulp-sftp');
+var moment = require('moment');
 var browserSync = require('browser-sync').create();
 var imagemin = require('gulp-imagemin');
 var del = require('del');
@@ -94,3 +97,36 @@ gulp.task('param', function(){
     console.log(process.argv);
     console.log(params(process.argv.splice(3)));
 })
+
+gulp.task('zip', function(){
+    var timestamp = moment().format('YYYY-MM-DD_HH-MM-SS');
+    var fileName = 'gulp-demo-' + timestamp + '.zip';
+    console.log('gulp-demo/' + fileName)
+    return gulp.src('./dist/**')
+        .pipe(gulpZip(fileName))
+        .pipe(gulp.dest('./dist'));
+})
+gulp.task('sftp', function(){
+    return gulp.src('./dist/*.zip')
+        .pipe(
+            sftp({
+                host: '45.78.47.74',
+                port: 27615,
+                user: 'haojie',
+                pass: 'haojie',
+                remotePath: '/home/gulp-demo'
+            })
+        )
+})
+// 发布测试服务器
+gulp.task('test', function(){
+    return gulp.src('./dist/*.zip')
+        .pipe(
+            sftp({
+                host: '45.78.47.74',
+                port: 27615,
+                user: 'haojie',
+                pass: 'haojie',
+                remotePath: '/home/gulp-demo'
+            })
+});

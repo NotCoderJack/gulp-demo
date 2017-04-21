@@ -31,7 +31,7 @@ if [ "$1" == "-test" ]; then
         git pull origin "$master"
         git pull origin "$branch"
         git push origin "$branch"
-        gulp lines
+        gulp test
         echo -e "\n\033[92m Upload to test ftp successfully.\n"
     else
         echo "Cancel Test Successfully!"
@@ -39,7 +39,7 @@ if [ "$1" == "-test" ]; then
     fi
 
 #上传发布ftp
-elif [ "$1" == "-depoly" ]; then
+elif [ "$1" == "-deploy" ]; then
     echo 'Note: before your upload, check the env file again! Sure to upload your project for TEST? yes/no:'
     read confirm
     if [ "$confirm" == "yes" ]; then
