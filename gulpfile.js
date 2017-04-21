@@ -120,7 +120,7 @@ gulp.task('sftp', function(){
 })
 // 发布测试服务器
 gulp.task('test', function(){
-    return gulp.src('./dist/*.zip')
+    return gulp.src('./dist/**')
         .pipe(
             gulpSftp({
                 host: '45.78.47.74',
