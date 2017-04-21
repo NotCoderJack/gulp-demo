@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # 本地git 库是否提交
-lines = `git status --porcelain | wc -l` #统计输出信息行数
-if [ "$lines" -gt 0]; then
+#统计输出信息行数
+lines=`git status --porcelain | wc -l`
+if [ "$lines" -gt 0 ]; then
     echo -e "\033[31m Git not clean, please commit first]"
     exit
 fi
